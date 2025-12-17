@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conflict Tracker</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .status-active { color: red; font-weight: bold; }
+        .status-frozen { color: orange; }
+        .status-ended { color: green; }
+    </style>
+</head>
+<body>
+<h1>Conflict Tracker</h1>
+<div id="loading">Loading conflicts...</div>
+<div id="conflicts-container" style="display: none;">
+    <table id="conflicts-table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Start Date</th>
+            <th>Status</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody id="conflicts-body">
+        </tbody>
+    </table>
+</div>
+
+<script>
+    fetch('/api/v1/conflicts')
+        .then(response => response.json())
+        .then(conflicts => {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('conflicts-container').style.display = 'block';
+
+            const tbody = document.getElementById('conflicts-body');
+            conflicts.forEach(conflict => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${conflict.name}</td>
+                    <td>${conflict.startDate}</td>
+                    <td class="status-${conflict.status.toLowerCase()}">${conflict.status}</td>
+                    <td>${conflict.description}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('loading').textContent = 'Error loading conflicts';
+        });
+</script>
+</body>
+</html>
