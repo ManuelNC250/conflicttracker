@@ -31,6 +31,22 @@ La aplicación utiliza perfiles de Spring para cambiar entre entornos:
 | `dev` (por defecto) | H2 en memoria | Desarrollo |
 | `prod` | PostgreSQL | Producción |
 
+## 🌐 Acceso a la aplicación
+
+Una vez ejecutada la aplicación, puedes acceder a:
+
+| Recurso | URL |
+|---------|-----|
+| **API REST** | `http://localhost:8080/api/v1/conflicts` |
+| **Interfaz Web (Thymeleaf)** | `http://localhost:8080/web/conflicts` |
+| **Consola H2 (solo perfil dev)** | `http://localhost:8080/h2-console` |
+| **Frontend testimonial** | `http://localhost:8080` |
+
+### Credenciales H2 (perfil dev)
+- **JDBC URL:** `jdbc:h2:mem:conflictdb`
+- **Usuario:** `sa`
+- **Contraseña:** *(vacío)*
+
 ## Endpoints principales
 
 ### Conflictos
