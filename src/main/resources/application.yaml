@@ -3,7 +3,7 @@ spring:
     name: ConflictTracker
 
   profiles:
-    active: dev  # "dev" para desarrollo con H2 "prod" para producci�n con PostgreSQL
+    active: prod  # "dev" para desarrollo con H2 "prod" para producci�n con PostgreSQL
 
   # Configuraci�n com�n para JPA
   jpa:

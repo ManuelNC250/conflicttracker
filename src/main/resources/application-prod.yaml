@@ -1,19 +1,23 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/conflicttracker
-    username: postgres
-    password: CONTRASEÑA  # Cambia esto
-    driver-class-name: org.postgresql.Driver
-
+    url: ${DATABASE_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   jpa:
-    # database-platform: org.hibernate.dialect.PostgreSQLDialect  # Opcional, Spring lo detecta
     hibernate:
       ddl-auto: update  # Para producción, actualiza sin borrar datos
     defer-datasource-initialization: true
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  server:
+    port: ${PORT:8080}
 
   sql:
     init:
-      mode: always  # O 'never' si no quieres data.sql en producción
+      mode: never  # O 'never' si no quieres data.sql en producción
       encoding: UTF-8
 
   h2:
